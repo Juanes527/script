@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ver Guiones</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      ul li a {
+        text-decoration: none;
+        color: #007bff;
+        display: block;
+      }
+      ul li a:hover {
+        text-decoration: underline;
+      }
+      .back-button {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lista de Guiones</h1>
+      <ul>
+        {% for guion in guiones %}
+        <li>
+          <a href="{% url 'detalles_guion' guion.id %}">{{ guion.titulo }}</a>
+          <a href="{% url 'editar_guion' guion.id %}">Editar Guion</a>
+        </li>
+        {% endfor %}
+      </ul>
+      <a class="back-button" href="{% url 'dashboard' %}">Inicio</a>
+    </div>
+  </body>
+</html>

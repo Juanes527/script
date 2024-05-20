@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRINCIPAL</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .sidebar {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #333;
+        padding-top: 20px;
+      }
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar ul li {
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+      }
+      .sidebar ul li:hover {
+        background-color: #555;
+      }
+      .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        display: block;
+      }
+      .content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+      h2 {
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul>
+        <li><a href="{% url 'ver_guiones' %}">Ver guiones</a></li>
+        <li><a href="{% url 'crear_guion' %}">Crear Guion</a></li>
+        <li><a href="{% url 'lista_guiones' %}">Editar guiones</a></li>
+        <li>
+          <a href="{% url 'lista_guion_historial' %}"> Historial de cambios</a>
+        </li>
+        <li>
+          <a
+            style="text-decoration: none; color: yellow"
+            href="{% url 'logout' %}"
+            >Cerrar sesion</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>SCRIPT MANAGEMENT</h2>
+      <p>Hola {{ data.username }}, tienes rol de usuario {{ data.role }}</p>
+      <p>CREA Y EDITA TUS GUIONES!</p>
+    </div>
+  </body>
+</html>

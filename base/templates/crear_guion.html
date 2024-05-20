@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear Guion</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .input-group label {
+        margin-right: 10px;
+      }
+      input[type="number"].small-input,
+      input[type="number"].small-input:focus {
+        padding: 6px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 60px;
+        font-size: 12px;
+      }
+      input[type="submit"] {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Crear Guion</h2>
+      <form method="post">
+        {% csrf_token %}
+        <label for="id_titulo">Título:</label>
+        {{ form.titulo }}
+        <label for="id_genero">Género:</label>
+        {{ form.genero }}
+        <label for="id_pose_actores">Pose de los Actores:</label>
+        {{ form.pose_actores }}
+        <div class="input-group">
+          <label for="id_ubicacion_x">Ubicación X:</label>
+          <input
+            type="number"
+            id="id_ubicacion_x"
+            name="ubicacion_x"
+            value="{{ form.initial.ubicacion_x }}"
+            class="small-input"
+            readonly
+          />
+          <label for="id_ubicacion_y">Ubicación Y:</label>
+          <input
+            type="number"
+            id="id_ubicacion_y"
+            name="ubicacion_y"
+            value="{{ form.initial.ubicacion_y }}"
+            class="small-input"
+            readonly
+          />
+          <label for="id_ubicacion_z">Ubicación Z:</label>
+          <input
+            type="number"
+            id="id_ubicacion_z"
+            name="ubicacion_z"
+            value="{{ form.initial.ubicacion_z }}"
+            class="small-input"
+            readonly
+          />
+        </div>
+        <div class="input-group">
+          <label for="id_rotacion_x">Rotación X:</label>
+          <input
+            type="number"
+            id="id_rotacion_x"
+            name="rotacion_x"
+            value="{{ form.initial.rotacion_x }}"
+            class="small-input"
+            readonly
+          />
+          <label for="id_rotacion_y">Rotación Y:</label>
+          <input
+            type="number"
+            id="id_rotacion_y"
+            name="rotacion_y"
+            value="{{ form.initial.rotacion_y }}"
+            class="small-input"
+            readonly
+          />
+          <label for="id_rotacion_z">Rotación Z:</label>
+          <input
+            type="number"
+            id="id_rotacion_z"
+            name="rotacion_z"
+            value="{{ form.initial.rotacion_z }}"
+            class="small-input"
+            readonly
+          />
+        </div>
+        <label for="id_dialogos">Diálogos:</label>
+        {{ form.dialogos }}
+        <input type="submit" value="Guardar" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Historial de Cambios - {{ guion.titulo }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+      }
+      .fecha {
+        font-size: 0.9em;
+        color: #666;
+      }
+      .cambios {
+        font-size: 1.1em;
+      }
+      .no-cambios {
+        font-size: 1.2em;
+        color: #666;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .cambio {
+        margin-bottom: 5px;
+      }
+      .cambio span {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Historial de Cambios - {{ guion.titulo }}</h1>
+      {% if cambios %}
+      <ul>
+        {% for cambio in cambios %}
+        <li>
+          <div class="fecha">Fecha: {{ cambio.fecha|date }}</div>
+          <div class="cambios">
+            {% for item in cambio.cambios %}
+            <div class="cambio">
+              <span>{{ item.campo }} anterior:</span> {{ item.valor_anterior }}
+              <br />
+              <span>{{ item.campo }} actual:</span> {{ item.nuevo_valor }}
+            </div>
+            {% endfor %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="no-cambios">
+        NO HAN HABIDO CAMBIOS, POR FAVOR EDITE EL GUION PARA PODER VISUALIZAR
+        CAMBIOS
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
