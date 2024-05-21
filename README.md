@@ -4,7 +4,6 @@ SCRIPT es una plataforma diseñada para simplificar la gestión de guiones de ac
 
 ## Video de demostración
 
-![Thumbnail del video](https://img.youtube.com/vi/frF89ZEmkhM/hqdefault.jpg)  
 [Ver el video en YouTube](https://youtu.be/frF89ZEmkhM?si=dKEq9EZhugYa2cCb)
 
 ## ¿Cómo se inicializa la app?
