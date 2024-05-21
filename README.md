@@ -1,6 +1,6 @@
 ## _SCRIPT_
 
-SCRIPT es una plataforma diseñada para simplificar la gestión de guiones de actuación. Desarrollada utilizando Python con el framework Django, junto con HTML, CSS y Bootstrap, esta aplicación ofrece una interfaz intuitiva para crear, editar y visualizar guiones de manera eficiente. Con características de inicio de sesión y registro con roles para restringir el acceso a algunas pestañas a usuarios estandar, el usuario guionista cuenta con permisos para crear, editar y ver historial de cambios de los guiones, SCRIPT proporciona una herramienta completa para escritores y profesionales del cine y el teatro.
+SCRIPT es una plataforma diseñada para simplificar la gestión de guiones de actuación. Desarrollada utilizando Python con el framework Django, junto con HTML, CSS, Bootstrap y SQLite como base de datos, esta aplicación ofrece una interfaz intuitiva para crear, editar y visualizar guiones de manera eficiente. Con características de inicio de sesión y registro con roles para restringir el acceso a algunas pestañas a usuarios estandar, el usuario guionista cuenta con permisos para crear, editar y ver historial de cambios de los guiones, SCRIPT proporciona una herramienta completa para escritores y profesionales del cine y el teatro.
 
 ## Video de demostración
 
@@ -15,6 +15,7 @@ SCRIPT es una plataforma diseñada para simplificar la gestión de guiones de ac
 ## Tecnologias 
 
 Python
+SQLite
 framework Django
 GIT
 HTML
