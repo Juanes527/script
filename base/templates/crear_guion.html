@@ -1,139 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crear Guion</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-      }
-      h2 {
-        color: #333;
-        margin-bottom: 20px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-      }
-      label {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      .input-group {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .input-group label {
-        margin-right: 10px;
-      }
-      input[type="number"].small-input,
-      input[type="number"].small-input:focus {
-        padding: 6px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 60px;
-        font-size: 12px;
-      }
-      input[type="submit"] {
-        background-color: #333;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      input[type="submit"]:hover {
-        background-color: #555;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2>Crear Guion</h2>
-      <form method="post">
-        {% csrf_token %}
-        <label for="id_titulo">Título:</label>
-        {{ form.titulo }}
-        <label for="id_genero">Género:</label>
-        {{ form.genero }}
-        <label for="id_pose_actores">Pose de los Actores:</label>
-        {{ form.pose_actores }}
-        <div class="input-group">
-          <label for="id_ubicacion_x">Ubicación X:</label>
-          <input
-            type="number"
-            id="id_ubicacion_x"
-            name="ubicacion_x"
-            value="{{ form.initial.ubicacion_x }}"
-            class="small-input"
-            readonly
-          />
-          <label for="id_ubicacion_y">Ubicación Y:</label>
-          <input
-            type="number"
-            id="id_ubicacion_y"
-            name="ubicacion_y"
-            value="{{ form.initial.ubicacion_y }}"
-            class="small-input"
-            readonly
-          />
-          <label for="id_ubicacion_z">Ubicación Z:</label>
-          <input
-            type="number"
-            id="id_ubicacion_z"
-            name="ubicacion_z"
-            value="{{ form.initial.ubicacion_z }}"
-            class="small-input"
-            readonly
-          />
+<head>
+    <title>CREAR GUION</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tmplt-style.css' %}">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body data-target="#navbarNav" data-offset="50">
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'dashboard' %}" class="nav-link">SCRIPT</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'ver_guiones' %}" class="nav-link">Ver guiones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'crear_guion' %}" class="nav-link">Crear guion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'lista_guiones' %}" class="nav-link">Editar guion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'lista_guion_historial' %}" class="nav-link">Historial de cambios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="input-group">
-          <label for="id_rotacion_x">Rotación X:</label>
-          <input
-            type="number"
-            id="id_rotacion_x"
-            name="rotacion_x"
-            value="{{ form.initial.rotacion_x }}"
-            class="small-input"
-            readonly
-          />
-          <label for="id_rotacion_y">Rotación Y:</label>
-          <input
-            type="number"
-            id="id_rotacion_y"
-            name="rotacion_y"
-            value="{{ form.initial.rotacion_y }}"
-            class="small-input"
-            readonly
-          />
-          <label for="id_rotacion_z">Rotación Z:</label>
-          <input
-            type="number"
-            id="id_rotacion_z"
-            name="rotacion_z"
-            value="{{ form.initial.rotacion_z }}"
-            class="small-input"
-            readonly
-          />
-        </div>
-        <label for="id_dialogos">Diálogos:</label>
-        {{ form.dialogos }}
-        <input type="submit" value="Guardar" />
-      </form>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <h2>Crear guion</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_titulo">Título:</label>
+                {{ form.titulo }}
+            </div>
+            <div class="form-group">
+                <label for="id_genero">Género:</label>
+                {{ form.genero }}
+            </div>
+            <div class="form-group">
+                <label for="id_pose_actores">Pose de los Actores:</label>
+                {{ form.pose_actores }}
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="id_ubicacion_x">Ubicación X:</label>
+                    <input type="number" id="id_ubicacion_x" name="ubicacion_x" value="{{ form.initial.ubicacion_x }}" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_ubicacion_y">Ubicación Y:</label>
+                    <input type="number" id="id_ubicacion_y" name="ubicacion_y" value="{{ form.initial.ubicacion_y }}" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_ubicacion_z">Ubicación Z:</label>
+                    <input type="number" id="id_ubicacion_z" name="ubicacion_z" value="{{ form.initial.ubicacion_z }}" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="id_rotacion_x">Rotación X:</label>
+                    <input type="number" id="id_rotacion_x" name="rotacion_x" value="{{ form.initial.rotacion_x }}" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_rotacion_y">Rotación Y:</label>
+                    <input type="number" id="id_rotacion_y" name="rotacion_y" value="{{ form.initial.rotacion_y }}" class="form-control" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_rotacion_z">Rotación Z:</label>
+                    <input type="number" id="id_rotacion_z" name="rotacion_z" value="{{ form.initial.rotacion_z }}" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_dialogos">Diálogos:</label>
+                {{ form.dialogos }}
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+        <div style="margin-bottom: 20px;"></div>
     </div>
-  </body>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
 </html>

@@ -1,75 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PRINCIPAL</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-      }
-      .sidebar {
-        height: 100%;
-        width: 250px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #333;
-        padding-top: 20px;
-      }
-      .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-      .sidebar ul li {
-        padding: 10px;
-        color: white;
-        cursor: pointer;
-      }
-      .sidebar ul li:hover {
-        background-color: #555;
-      }
-      .sidebar ul li a {
-        text-decoration: none;
-        color: white;
-        display: block;
-      }
-      .content {
-        margin-left: 250px;
-        padding: 20px;
-      }
-      h2 {
-        color: #333;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <ul>
-        <li><a href="{% url 'ver_guiones' %}">Ver guiones</a></li>
-        <li><a href="{% url 'crear_guion' %}">Crear Guion</a></li>
-        <li><a href="{% url 'lista_guiones' %}">Editar guiones</a></li>
-        <li>
-          <a href="{% url 'lista_guion_historial' %}"> Historial de cambios</a>
-        </li>
-        <li>
-          <a
-            style="text-decoration: none; color: yellow"
-            href="{% url 'logout' %}"
-            >Cerrar sesion</a
-          >
-        </li>
-      </ul>
-    </div>
+<head>
 
-    <div class="content">
-      <h2>SCRIPT MANAGEMENT</h2>
-      <p>Hola {{ data.username }}, tienes rol de usuario {{ data.role }}</p>
-      <p>CREA Y EDITA TUS GUIONES!</p>
-    </div>
-  </body>
+     <title>PRINCIPAL</title>
+
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tmplt-style.css' %}">
+
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+     <link rel="stylesheet" href="{% static 'css/tmplt-style.css' %}">
+
+</head>
+<body  data-target="#navbarNav" data-offset="50">
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="{% url 'dashboard' %}" class="nav-link">SCRIPT</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'ver_guiones' %}" class="nav-link">Ver guiones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'crear_guion' %}" class="nav-link">Crear guion</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'lista_guiones' %}" class="nav-link">Editar guion</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'lista_guion_historial' %}" class="nav-link">Historial de cambios</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">Cerrar sesión</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+     <section class="hero d-flex flex-column justify-content-center align-items-center" id="home">
+
+            <div class="bg-overlay"></div>
+
+               <div class="container">
+                    <div class="row">
+
+                         <div class="col-lg-8 col-md-10 mx-auto col-12">
+                              <div class="hero-text mt-5 text-center">
+
+                                    <h6 data-aos="fade-up" data-aos-delay="300">Hola {{ data.username }}, tienes rol de usuario {{ data.role }}</h6>
+
+                                    <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">¡Comienza a crear y gestionar tus guiones!</h1>
+                                   
+                              </div>
+                         </div>
+
+                    </div>
+               </div>
+     </section>
+
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'js/aos.js' %}"></script>
+     <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
 </html>

@@ -6,10 +6,14 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.http import HttpResponseBadRequest
 from .models import User, Guion, GuionHistorial
+from django.core.exceptions import PermissionDenied
 from .forms import GuionForm
 from django.http import HttpResponse
 from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Frame
+from reportlab.lib.units import inch
+
 from django.utils import timezone
 
 
@@ -26,6 +30,7 @@ def login(request):
 
         if user is not None:
             request.session["user_id"] = user.id
+            request.session["role"] = user.role
             return redirect("dashboard")
         else:
             error_message = "Usuario o contraseña incorrectos!"
@@ -73,6 +78,8 @@ def logout(request):
 
 
 def crear_guion(request):
+    if request.session.get("role") != "guionista":
+        raise PermissionDenied()
     if request.method == "POST":
         form = GuionForm(request.POST)
         if form.is_valid():
@@ -90,11 +97,15 @@ def ver_guiones(request):
 
 
 def lista_guion_historial(request):
+    if request.session.get("role") != "guionista":
+        raise PermissionDenied()
     guiones = Guion.objects.all()
     return render(request, "lista_guion_historial.html", {"guiones": guiones})
 
 
 def lista_guiones(request):
+    if request.session.get("role") != "guionista":
+        raise PermissionDenied()
     guiones = Guion.objects.all()
     return render(request, "lista_guiones.html", {"guiones": guiones})
 
@@ -110,26 +121,39 @@ def generar_pdf(request, guion_id):
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f'attachment; filename="{guion.titulo}.pdf"'
 
-    p = canvas.Canvas(response, pagesize=letter)
-    width, height = letter
-
-    p.drawString(100, height - 100, f"Título: {guion.titulo}")
-    p.drawString(100, height - 120, f"Género: {guion.genero}")
-    p.drawString(100, height - 140, f"Pose de los Actores: {guion.pose_actores.gesto}")
-    p.drawString(
-        100, height - 160, f"Ubicación de los Actores: {guion.ubicacion_actores}"
+    doc = SimpleDocTemplate(
+        response,
+        pagesize=letter,
+        rightMargin=72,
+        leftMargin=72,
+        topMargin=72,
+        bottomMargin=18,
     )
-    p.drawString(100, height - 180, "Diálogos:")
-    p.drawString(100, height - 200, guion.dialogos)
 
-    p.showPage()
-    p.save()
+    styles = getSampleStyleSheet()
+    Story = []
+
+    Story.append(Paragraph(f"Título: {guion.titulo}", styles["Normal"]))
+    Story.append(Spacer(1, 12))
+    Story.append(Paragraph(f"Género: {guion.genero}", styles["Normal"]))
+    Story.append(Spacer(1, 12))
+    Story.append(
+        Paragraph(f"Pose de los Actores: {guion.pose_actores.gesto}", styles["Normal"])
+    )
+    Story.append(Spacer(1, 12))
+    Story.append(
+        Paragraph(
+            f"Ubicación de los Actores: {guion.ubicacion_actores}", styles["Normal"]
+        )
+    )
+    Story.append(Spacer(1, 12))
+    Story.append(Paragraph("Diálogos:", styles["Normal"]))
+    Story.append(Spacer(1, 12))
+    Story.append(Paragraph(guion.dialogos, styles["Normal"]))
+
+    doc.build(Story)
+
     return response
-
-
-def lista_guion_historial(request):
-    guiones = Guion.objects.all()
-    return render(request, "lista_guion_historial.html", {"guiones": guiones})
 
 
 def editar_guion(request, guion_id):

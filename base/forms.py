@@ -42,6 +42,13 @@ class GuionForm(forms.ModelForm):
             self.initial["rotacion_y"] = round(random.uniform(0, 360))
             self.initial["rotacion_z"] = round(random.uniform(0, 360))
 
+        # Add Bootstrap classes to form fields
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+        self.fields["dialogos"].widget.attrs.update(
+            {"rows": "5"}
+        )  # Adjust the dialog field size
+
     def save(self, commit=True):
         guion = super().save(commit=False)
         ubicacion_x = self.cleaned_data["ubicacion_x"]

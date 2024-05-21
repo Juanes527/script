@@ -1,73 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Historial de Cambios - {{ guion.titulo }}</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 20px;
-      }
-      .container {
-        max-width: 800px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-      }
-      h1 {
-        color: #333;
-        margin-bottom: 20px;
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      li {
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 4px;
-      }
-      .fecha {
-        font-size: 0.9em;
-        color: #666;
-      }
-      .cambios {
-        font-size: 1.1em;
-      }
-      .no-cambios {
-        font-size: 1.2em;
-        color: #666;
-        text-align: center;
-        margin-top: 20px;
-      }
-      .cambio {
-        margin-bottom: 5px;
-      }
-      .cambio span {
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
+<head>
+
+     <title>HISTORIAL CAMBIOS</title>
+
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tmplt-style.css' %}">
+
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+     <link rel="stylesheet" href="{% static 'css/tmplt-style.css' %}">
+
+</head>
+<body  data-target="#navbarNav" data-offset="50">
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="{% url 'dashboard' %}" class="nav-link">SCRIPT</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'ver_guiones' %}" class="nav-link">Ver guiones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'crear_guion' %}" class="nav-link">Crear guion</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'lista_guiones' %}" class="nav-link">Editar guion</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'lista_guion_historial' %}" class="nav-link">Historial de cambios</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">Cerrar sesión</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
       <h1>Historial de Cambios - {{ guion.titulo }}</h1>
       {% if cambios %}
       <ul>
         {% for cambio in cambios %}
         <li>
-          <div class="fecha">Fecha: {{ cambio.fecha|date }}</div>
+          <div class="fecha">Fecha de modificacion: {{ cambio.fecha|date }}</div>
           <div class="cambios">
             {% for item in cambio.cambios %}
             <div class="cambio">
-              <span>{{ item.campo }} anterior:</span> {{ item.valor_anterior }}
+              <span><strong>{{ item.campo }} anterior:</strong></span> {{ item.valor_anterior }}
               <br />
-              <span>{{ item.campo }} actual:</span> {{ item.nuevo_valor }}
+              <span><strong>{{ item.campo }} actual:</strong></span> {{ item.nuevo_valor }}
+              <div style="margin-bottom: 5px;"></div>
             </div>
             {% endfor %}
           </div>
@@ -76,10 +87,14 @@
       </ul>
       {% else %}
       <div class="no-cambios">
-        NO HAN HABIDO CAMBIOS, POR FAVOR EDITE EL GUION PARA PODER VISUALIZAR
-        CAMBIOS
+        NO HAN HABIDO CAMBIOS. POR FAVOR, EDITE EL GUION PARA VISUALIZAR LOS CAMBIOS.
       </div>
       {% endif %}
     </div>
-  </body>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
 </html>
